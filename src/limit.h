@@ -7,7 +7,8 @@
 
 class Limit {
 public:
-    Limit(double l);
+    Limit(double l)
+        : limitPrice(l), size(0), totalVol(0), headOrder(nullptr), tailOrder(nullptr) {}
 
     inline void addOrder(Order* newOrder){ 
         if (this->size == 0){
@@ -25,7 +26,7 @@ public:
         this->totalVol += newOrder->getShares();
     }
 
-    inline void removeOrder(Order* order){ // change to just remove the first node maybe? idk if i need the whole implementation lol
+    inline void removeOrder(Order* order){ // consider making another function to just remove next node in order for efficiency
         this->size -= 1;
         this->totalVol -= order->getShares();
         if (this->size != 0){
@@ -62,9 +63,6 @@ private:
     double limitPrice;
     int size;
     int totalVol;
-    Limit* parent;
-    Limit* left;
-    Limit* right;
     Order* headOrder;
     Order* tailOrder;
 };

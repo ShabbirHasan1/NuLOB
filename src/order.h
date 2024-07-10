@@ -6,8 +6,8 @@ class Limit;
 
 class Order {
 public:
-    Order(char* t, bool b, bool m, int s, double et); // market
-    Order(char* t, bool b, bool m, int s, double l, double et); // limit
+    Order(int* t, bool b, bool m, int s, double et); // market
+    Order(int* t, bool b, bool m, int s, double l, double et); // limit
 
     inline void updateShares(int qty, int time);
 
@@ -15,8 +15,11 @@ public:
 
     inline bool getBidorask() const { return bidorask; }
 
-    inline char* getTid() { return tid; }
-    inline void setTid(char* tid) { this->tid = tid; }
+    inline int* getTid() { return tid; }
+    inline void setTid(int* tid) { this->tid = tid; }
+
+    inline int* getQid() { return qid; }
+    inline void setQid(int* qid) { this->qid = qid; }
 
     inline int getShares() { return shares; }
     inline void setShares(int shares) { this->shares = shares; }
@@ -40,10 +43,11 @@ public:
     inline void setParent(Limit* parent) { this->parent = parent; }
 
 private:
-    char *tid;
+    int *tid;
+    int *qid;
+    int shares;
     bool bidorask;
     bool isMarket;
-    int shares;
     double limitPrice;
     double entryTime;
     double eventTime;
